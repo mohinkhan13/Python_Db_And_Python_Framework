@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search Products</title>
+    <style type="text/css">
+        body{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+            background-color: #F9F9FC;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-top: -20px;
+        }
+        .row_1{
+            background-color: lightgoldenrodyellow;
+            padding: 5px 50px 50px 50px;
+            border-radius: 5px;
+            width: 500px;
+
+        }
+        .row_1 form{
+            display: flex;
+
+
+        }
+        .row_1 form input{
+            height: 40px;
+            box-shadow: 0.2px 0.2px 5px rgb(201, 199, 199);
+            width: 100%;
+            border: none;
+            border-radius: 8px 0px 0px 8px;
+            padding: 0 45px 0 15px;
+            font-size: 18px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            
+        }
+        .row_1 form input:focus{
+            outline: None;
+        }
+        .row_1 form button{
+            background-color: blueviolet;
+            color: white;
+            font-size: 18px;
+            font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            border: none;
+            border-radius: 0px 8px 8px 0px;
+            box-shadow: 0.2px 0.2px 5px rgb(201, 199, 199);
+        }
+        .row_2{
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            align-items: center;
+            padding: 5px 50px 50px 50px;
+            border-radius: 5px;
+            width: 80%;
+        }
+        .tabel{
+            width: 60%;
+            text-align: center;       
+            border: 1px solid black;  
+            padding: 10px;   
+            background-color: lightgoldenrodyellow;
+            border: 1px solid blck;
+        }
+        .table th, td{
+            padding: 10px 15px;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row_1">
+            <h1>Search for a Product</h1>
+            <form method="GET" action="{% url 'search_product' %}">
+                <input type="text" name="q" placeholder="Search product...">
+                <button type="submit">Search</button>
+            </form>    
+        </div>
+        <div class="row_2">
+            <h2>Product Results</h2>
+            <table class="tabel">
+                <thead>
+                    <th>Sr No</th>
+                    <th>Name</th>
+                    <th>Model</th>
+                    <th>Price</th>
+                </thead>
+                <tbody>
+                    {% for product in products %}
+                    <tr>
+                        <td>{{forloop.counter}}</td>
+                        <td>{{ product.product.product_name }}</td>
+                        <td>{{ product.product_model }}</td>
+                        <td>${{ product.product_price }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>            
+        </div>
+    </div>
+</body>
+</html>
